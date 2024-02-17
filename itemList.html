@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initials Box</title>
+                <style>
+                    /* Style the select menu */
+                    select {
+                        padding: 4px;
+                        font-size: 14px;
+                        border: 1px solid #000000;
+                        background-color: #ffffff;
+                        width: 60px; /* Adjust width as needed */
+                        height: 28px;
+                        margin: 2px;
+                        display: inline-block;
+                    }
+
+                    /* Style the options */
+                    option {
+                        padding: 10px;
+                        font-size: 14px;
+                        z-index: 1;
+                        display: inline-block;
+                    }
+
+                    /* Style the select when it's focused */
+                    select:focus {
+                        outline: none;
+                        border-color: #3f3b3b;
+                    }
+                </style>                
+    <title>Item Box</title>
+                <style>
+                    .item-box {
+                        border: 1px solid #000000; /* Adds a black border around the div */
+                        padding: 4px; /* Adds some space between the text and the border */
+                        margin: 4px 0; /* Adds some space outside the border */
+                        width: 150px; /* Specifies the width of the box */
+                        height: 20px; /* Specifies the height of the box */
+                        overflow: auto; /* Ensures the content is scrolled if it overflows */
+                        background-color: #ffffff; /* Sets a light gray background color */
+                        display: inline-block;
+                    }
+                </style>
+    <title>Price Box</title>
+                <style>
+                    .price-box {
+                        border: 1px solid #000000; /* Adds a black border around the div */
+                        padding: 4px; /* Adds some space between the text and the border */
+                        margin: 4px 0; /* Adds some space outside the border */
+                        width: 50px; /* Specifies the width of the box */
+                        height: 20px; /* Specifies the height of the box */
+                        overflow: auto; /* Ensures the content is scrolled if it overflows */
+                        background-color: #ffffff; /* Sets a light gray background color */
+                        display: inline-block;
+                    }
+                </style>
+    <title>My Basic Webpage</title>
+</head>    
+<body>
+    <header>
+        <h1>Welcome to My Basic Webpage</h1>
+    </header>
+
+    <nav>
+    
+        <ul>
+            <div class="initials-box">
+                <select id="initialSelect">
+                    <option value="option1">AT</option>
+                    <option value="option2">DG</option>
+                    <option value="option3">NB</option>
+                    <option value="option4">WW</option>
+                </select>
+                <script>
+                    // Get the select element
+                    var selectElement = document.getElementById('mySelect');
+
+                    // Add event listener to listen for changes
+                    selectElement.addEventListener('change', function() {
+                        // Get the selected value
+                        var selectedValue = selectElement.value;
+                        console.log("Selected value: " + selectedValue);
+                        // You can perform further actions based on the selected value here
+                    });
+                </script>
+            </div>
+
+                <div class="item-box" contenteditable="true">
+                    Bananas
+                </div>
+                <div class="price-box" contenteditable="true">
+                    $1.49
+                </div>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>This is a basic webpage created using HTML. It serves as an example of a simple webpage structure.</p>
+        </section>
+
+        <section>
+            <h2>Contact Information</h2>
+            <p>You can contact me at example@example.com.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Basic Webpage. All rights reserved.</p>
+    </footer>
+</body>
+</html>
