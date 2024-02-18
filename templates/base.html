@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bill Breaker{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <!-- Common header content goes here -->
+        <h1>Bill Breaker</h1>
+        <nav>
+            <ul>
+                <li><button onclick="window.location.href='/uploadImage.html'">Break New Bill</button></li> 
+                <!-- Add more links as needed -->
+            </ul>
+            
+        </nav>
+    </header>
+
+    <main>
+        <!-- Content specific to each page will go here -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Cutthroat Coders. All rights reserved.</p>
+    </footer>
+</body>
+</html>

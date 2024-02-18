@@ -1,0 +1,151 @@
+/* Body */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7; /* Light gray background */
+    color: #333; /* Default text color */
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 5px; /* Increased padding for better spacing */
+    text-align: center; /* Center align header content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+/* Navigation */
+nav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff8c00;
+}
+
+
+/* Main Content */
+main {
+    padding: 20px; /* Padding around main content */
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 5px; 
+    text-align: center; /* Center align footer content */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+/* Button */
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0; /* Increased vertical margin for better spacing */
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Increased shadow on hover */
+}
+
+/* Common styles */
+.item-box {
+    border: 1px solid #000000; /* Adds a black border around the div */
+    padding: 4px; /* Adds some space between the text and the border */
+    margin-left: 4px; /* Adds some space outside the border */
+    width: 150px; /* Specifies the width of the box */
+    height: 20px; /* Specifies the height of the box */
+    overflow: auto; /* Ensures the content is scrolled if it overflows */
+    background-color: #ffffff; /* Sets a light gray background color */
+    display: inline-block;
+}
+
+.price-box {
+    border: 1px solid #000000; /* Adds a black border around the div */
+    padding: 4px; /* Adds some space between the text and the border */
+    margin-left: 4px; /* Adds some space outside the border */
+    width: 50px; /* Specifies the width of the box */
+    height: 20px; /* Specifies the height of the box */
+    overflow: auto; /* Ensures the content is scrolled if it overflows */
+    background-color: #ffffff; /* Sets a light gray background color */
+    display: inline-block;
+}
+
+.initials {
+    border: 1px solid #000000;
+    padding: 4px;
+    width: 40px;
+    height: 20px;
+    background-color: #ffffff;
+    display: inline-block;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Style the select menu */
+.item_line {
+    display: flex;
+    align-items: center;
+}
+select {
+    padding: 4px;
+    font-size: 14px; 
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    width: 60px; /* Adjust width as needed */
+    height: 29px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+}
+
+/* Style the options */
+option {
+    padding: 10px;
+    font-size: 14px;
+    z-index: 1;
+    display: flex;
+}
+
+/* Style the select when it's focused */
+select:focus {
+    outline: none;
+    border-color: #3f3b3b;
+}
