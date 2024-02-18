@@ -6,37 +6,42 @@
     <title>Initials Box</title>
                 <style>
                     /* Style the select menu */
-                    select {
-                        padding: 4px;
-                        font-size: 14px;
-                        border: 1px solid #000000;
-                        background-color: #ffffff;
-                        width: 60px; /* Adjust width as needed */
-                        height: 28px;
-                        margin: 2px;
-                        display: inline-block;
-                    }
+                        .item_line {
+                            display: flex;
+                            align-items: center;
+                        }
+                        select {
+                            padding: 4px;
+                            font-size: 14px;
+                            border: 1px solid #000000;
+                            background-color: #ffffff;
+                            width: 60px; /* Adjust width as needed */
+                            height: 29px;
+                            margin: 2px;
+                            display: flex;
+                            align-items: center;
+                        }
 
-                    /* Style the options */
-                    option {
-                        padding: 10px;
-                        font-size: 14px;
-                        z-index: 1;
-                        display: inline-block;
-                    }
+                        /* Style the options */
+                        option {
+                            padding: 10px;
+                            font-size: 14px;
+                            z-index: 1;
+                            display: flex;
+                        }
 
-                    /* Style the select when it's focused */
-                    select:focus {
-                        outline: none;
-                        border-color: #3f3b3b;
-                    }
+                        /* Style the select when it's focused */
+                        select:focus {
+                            outline: none;
+                            border-color: #3f3b3b;
+                        }
                 </style>                
     <title>Item Box</title>
                 <style>
                     .item-box {
                         border: 1px solid #000000; /* Adds a black border around the div */
                         padding: 4px; /* Adds some space between the text and the border */
-                        margin: 4px 0; /* Adds some space outside the border */
+                        margin-left: 4px; /* Adds some space outside the border */
                         width: 150px; /* Specifies the width of the box */
                         height: 20px; /* Specifies the height of the box */
                         overflow: auto; /* Ensures the content is scrolled if it overflows */
@@ -49,7 +54,7 @@
                     .price-box {
                         border: 1px solid #000000; /* Adds a black border around the div */
                         padding: 4px; /* Adds some space between the text and the border */
-                        margin: 4px 0; /* Adds some space outside the border */
+                        margin-left: 4px; /* Adds some space outside the border */
                         width: 50px; /* Specifies the width of the box */
                         height: 20px; /* Specifies the height of the box */
                         overflow: auto; /* Ensures the content is scrolled if it overflows */
@@ -67,33 +72,35 @@
     <nav>
     
         <ul>
-            <div class="initials-box">
-                <select id="initialSelect">
-                    <option value="option1">AT</option>
-                    <option value="option2">DG</option>
-                    <option value="option3">NB</option>
-                    <option value="option4">WW</option>
-                </select>
-                <script>
-                    // Get the select element
-                    var selectElement = document.getElementById('mySelect');
+            <div class="item_line">
+                <div class="initials-box">
+                    <select id="initialSelect">
+                        <option value="option1">AT</option>
+                        <option value="option2">DG</option>
+                        <option value="option3">NB</option>
+                        <option value="option4">WW</option>
+                    </select>
+                    <script>
+                        // Get the select element
+                        var selectElement = document.getElementById('initialSelect');
 
-                    // Add event listener to listen for changes
-                    selectElement.addEventListener('change', function() {
-                        // Get the selected value
-                        var selectedValue = selectElement.value;
-                        console.log("Selected value: " + selectedValue);
-                        // You can perform further actions based on the selected value here
-                    });
-                </script>
+                        // Add event listener to listen for changes
+                        selectElement.addEventListener('change', function() {
+                            // Get the selected value
+                            var selectedValue = selectElement.value;
+                            console.log("Selected value: " + selectedValue);
+                            // You can perform further actions based on the selected value here
+                        });
+                    </script>
+                </div>
+
+                    <div class="item-box" contenteditable="true">
+                        Bananas
+                    </div>
+                    <div class="price-box" contenteditable="true">
+                        $1.49
+                    </div>
             </div>
-
-                <div class="item-box" contenteditable="true">
-                    Bananas
-                </div>
-                <div class="price-box" contenteditable="true">
-                    $1.49
-                </div>
         </ul>
     </nav>
 
