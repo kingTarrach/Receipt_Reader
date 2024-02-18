@@ -85,14 +85,18 @@
     <nav>
         <h2>Purchaser List</h2>
         <p style="margin-right: 10px; font-size: 16px;">Purchasers:</p>
-            <div class="item_list">
-                <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px" oninput="updateInitials(this)">
-                <input type="text" class="initials" placeholder="Initials" readonly>
+            <div id="purchasersContainer">
+                <div class="item_list">
+                    <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px" oninput="updateInitials(this)">
+                    <input type="text" class="initials" placeholder="Initials" readonly>
+                </div>
+                <div class="item_list">
+                    <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials(this)">
+                    <input type="text" class="initials" placeholder="Initials" readonly>
+                </div>
             </div>
-            <div class="item_list">
-                <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials(this)">
-                <input type="text" class="initials" placeholder="Initials" readonly>
-            </div>
+            <button onclick="addItem()">Add Purchaser</button>
+
             <script>
                 function updateInitials(element) {
                     var fullName = element.value;
@@ -102,6 +106,34 @@
                     // Within this 'item_list', find the element with class 'initials'
                     var initialsInput = itemList.querySelector('.initials');
                     initialsInput.value = initials.toUpperCase();
+                }
+
+                function addItem() {
+                    // Create a new div with class 'item_list'
+                    var newItemList = document.createElement('div');
+                    newItemList.className = 'item_list';
+
+                    // Create the fullName input
+                    var fullNameInput = document.createElement('input');
+                    fullNameInput.type = 'text';
+                    fullNameInput.className = 'fullName';
+                    fullNameInput.placeholder = 'Full Name';
+                    fullNameInput.style.marginRight = '10px';
+                    fullNameInput.oninput = function() { updateInitials(this); };
+
+                    // Create the initials input
+                    var initialsInput = document.createElement('input');
+                    initialsInput.type = 'text';
+                    initialsInput.className = 'initials';
+                    initialsInput.placeholder = 'Initials';
+                    initialsInput.readOnly = true;
+
+                    // Append the inputs to the newItemList div
+                    newItemList.appendChild(fullNameInput);
+                    newItemList.appendChild(initialsInput);
+
+                    // Append the newItemList div to the container
+                    document.getElementById('purchasersContainer').appendChild(newItemList);
                 }
             </script>
     </nav>
