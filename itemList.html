@@ -108,6 +108,32 @@
                 updateOptions();
             }
 
+            const totals = {}; // Object to keep track of total prices per purchaser
+
+            function updateTotalPrices() {
+                // Reset totals
+                Object.keys(totals).forEach(key => totals[key] = 0);
+
+                // Calculate new totals
+                document.querySelectorAll('#itemsContainer .item_line').forEach(line => {
+                    const initials = line.querySelector('select').value;
+                    const price = parseFloat(line.querySelector('.price-box').textContent.replace('$', ''));
+                    if (!isNaN(price)) {
+                        if (!totals[initials]) totals[initials] = 0;
+                        totals[initials] += price;
+                    }
+                });
+
+                // Display totals
+                const totalsDisplay = document.getElementById('totalsDisplay') || document.createElement('div');
+                totalsDisplay.id = 'totalsDisplay';
+                totalsDisplay.innerHTML = '<h3>Total Prices Per Purchaser</h3>';
+                Object.entries(totals).forEach(([initial, total]) => {
+                    totalsDisplay.innerHTML += `<p>${initial}: $${total.toFixed(2)}</p>`;
+                });
+                document.body.appendChild(totalsDisplay);
+            }
+
             function addItem() {
                 var newItemList = document.createElement('div');
                 newItemList.className = 'item_list';
@@ -188,6 +214,10 @@
                 itemBox.contentEditable = true;
                 itemBox.textContent = itemText;
 
+                // Add event listeners to recalculate totals when item details change
+                select.addEventListener('change', updateTotalPrices);
+                priceBox.addEventListener('input', updateTotalPrices);
+
                 const priceBox = document.createElement('div');
                 priceBox.className = 'price-box';
                 priceBox.contentEditable = true;
@@ -204,30 +234,32 @@
                     console.log("Selected value: " + selectedValue);
                 });
             }
+///////// CONSTRUCTION ZONE
+            // document.addEventListener('DOMContentLoaded', () => {
+                
+            //     addItemLine('Bananas', '$1.49', 'itemsContainer');
+            //     // Call addItemLine as many times as needed with different parameters to add more items
+                
+            //     addItemLine('Apples', '$2.49', 'itemsContainer');
+            // });
+            const itemsFromFlask = {{ items|tojson }};
+            const subtotalFromFlask = "{{ subtotal }}";
 
             document.addEventListener('DOMContentLoaded', () => {
-                const options1 = [
-                    { value: 'option1', text: 'AT' },
-                    { value: 'option2', text: 'DG' },
-                    { value: 'option3', text: 'HI' },
-                    { value: 'option4', text: 'WW' }
-                ];
-                addItemLine('Bananas', '$1.49', 'itemsContainer');
-                // Call addItemLine as many times as needed with different parameters to add more items
-                const options2 = [
-                    { value: 'option1', text: 'BG' },
-                    { value: 'option2', text: 'DG' },
-                    { value: 'option3', text: 'HI' },
-                    { value: 'option4', text: 'WW' }
-                ];
-                addItemLine('Apples', '$2.49', 'itemsContainer');
+                // Now, use itemsFromFlask and subtotalFromFlask with your addItemLine function
+                itemsFromFlask.forEach(item => {
+                    addItemLine(item.itemName, `$${item.price}`, 'itemsContainer');
+                });
+
+                // Optionally, update subtotal display using subtotalFromFlask
+                document.getElementById('subtotalValue').textContent = `$${subtotalFromFlask}`;
             });
 
             const addButton = document.createElement('button');
             addButton.textContent = 'Add Item';
             addButton.onclick = function() {
                 // Call addItemLine as many times as needed with different parameters to add more items
-                addItemLine('New Item', '$2.99', 'itemsContainer');
+                addItemLine('New Item', '$0.00', 'itemsContainer');
             };
 
             document.getElementById('itemsContainer').appendChild(addButton);
