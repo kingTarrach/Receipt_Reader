@@ -204,30 +204,32 @@
                     console.log("Selected value: " + selectedValue);
                 });
             }
+///////// CONSTRUCTION ZONE
+            // document.addEventListener('DOMContentLoaded', () => {
+                
+            //     addItemLine('Bananas', '$1.49', 'itemsContainer');
+            //     // Call addItemLine as many times as needed with different parameters to add more items
+                
+            //     addItemLine('Apples', '$2.49', 'itemsContainer');
+            // });
+            const itemsFromFlask = {{ items|tojson }};
+            const subtotalFromFlask = "{{ subtotal }}";
 
             document.addEventListener('DOMContentLoaded', () => {
-                const options1 = [
-                    { value: 'option1', text: 'AT' },
-                    { value: 'option2', text: 'DG' },
-                    { value: 'option3', text: 'HI' },
-                    { value: 'option4', text: 'WW' }
-                ];
-                addItemLine('Bananas', '$1.49', 'itemsContainer');
-                // Call addItemLine as many times as needed with different parameters to add more items
-                const options2 = [
-                    { value: 'option1', text: 'BG' },
-                    { value: 'option2', text: 'DG' },
-                    { value: 'option3', text: 'HI' },
-                    { value: 'option4', text: 'WW' }
-                ];
-                addItemLine('Apples', '$2.49', 'itemsContainer');
+                // Now, use itemsFromFlask and subtotalFromFlask with your addItemLine function
+                itemsFromFlask.forEach(item => {
+                    addItemLine(item.itemName, `$${item.price}`, 'itemsContainer');
+                });
+
+                // Optionally, update subtotal display using subtotalFromFlask
+                document.getElementById('subtotalValue').textContent = `$${subtotalFromFlask}`;
             });
 
             const addButton = document.createElement('button');
             addButton.textContent = 'Add Item';
             addButton.onclick = function() {
                 // Call addItemLine as many times as needed with different parameters to add more items
-                addItemLine('New Item', '$2.99', 'itemsContainer');
+                addItemLine('New Item', '$0.00', 'itemsContainer');
             };
 
             document.getElementById('itemsContainer').appendChild(addButton);
