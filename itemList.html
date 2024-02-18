@@ -62,47 +62,113 @@
                         display: inline-block;
                     }
                 </style>
-    <title>My Basic Webpage</title>
+    <title>Initials</title>
+                <style>
+                    .initials {
+                        border: 1px solid #000000;
+                        padding: 4px;
+                        width: 40px;
+                        height: 20px;
+                        background-color: #ffffff;
+                        display: inline-block;
+                    }
+                </style>
 </head>    
 <body>
     <header>
-        <h1>Welcome to My Basic Webpage</h1>
+        <h1>Splitting Page</h1>
+        
     </header>
 
     <nav>
-    
-        <ul>
-            <div class="item_line">
-                <div class="initials-box">
-                    <select id="initialSelect">
-                        <option value="option1">AT</option>
-                        <option value="option2">DG</option>
-                        <option value="option3">NB</option>
-                        <option value="option4">WW</option>
-                    </select>
-                    <script>
-                        // Get the select element
-                        var selectElement = document.getElementById('initialSelect');
-
-                        // Add event listener to listen for changes
-                        selectElement.addEventListener('change', function() {
-                            // Get the selected value
-                            var selectedValue = selectElement.value;
-                            console.log("Selected value: " + selectedValue);
-                            // You can perform further actions based on the selected value here
-                        });
-                    </script>
-                </div>
-
-                    <div class="item-box" contenteditable="true">
-                        Bananas
-                    </div>
-                    <div class="price-box" contenteditable="true">
-                        $1.49
-                    </div>
+        <h2>Purchaser List</h2>
+            <div class="item_list">
+                <p style="margin-right: 10px; font-size: 16px;">Purchaser 1:</p>
+                <input type="text" id="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials()">
+                <input type="text" id="initials" placeholder="Initials" readonly>
             </div>
-        </ul>
+            <script>
+                function updateInitials() {
+                    var fullName = document.getElementById('fullName').value;
+                    var initials = fullName.split(' ').map((n)=>n[0]).join('');
+                    document.getElementById('initials').value = initials.toUpperCase();
+                }
+            </script>
     </nav>
+    <nav>
+    <h2>Item List</h2>
+    <ul id="itemsContainer">
+        <!-- Dynamically added item lines will go here -->
+    </ul>
+    </nav>
+
+    <script>
+        function addItemLine(itemText, priceText, options, containerId) {
+            // Create the item line container
+            const itemLine = document.createElement('div');
+            itemLine.className = 'item_line';
+
+            // Create the initials box and select element
+            const initialsBox = document.createElement('div');
+            initialsBox.className = 'initials-box';
+            const select = document.createElement('select');
+            // Generate a unique ID for the select element
+            const selectId = `initialSelect-${Math.random().toString(36).substr(2, 9)}`;
+            select.id = selectId;
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option.value;
+                optionElement.textContent = option.text;
+                select.appendChild(optionElement);
+            });
+            initialsBox.appendChild(select);
+
+            // Create the item box
+            const itemBox = document.createElement('div');
+            itemBox.className = 'item-box';
+            itemBox.contentEditable = true;
+            itemBox.textContent = itemText;
+
+            // Create the price box
+            const priceBox = document.createElement('div');
+            priceBox.className = 'price-box';
+            priceBox.contentEditable = true;
+            priceBox.textContent = priceText;
+
+            // Append all to itemLine
+            itemLine.appendChild(initialsBox);
+            itemLine.appendChild(itemBox);
+            itemLine.appendChild(priceBox);
+
+            // Add the item line to the container
+            document.getElementById(containerId).appendChild(itemLine);
+
+            // Add event listener to the select element
+            document.getElementById(selectId).addEventListener('change', function() {
+                var selectedValue = this.value;
+                console.log("Selected value: " + selectedValue);
+            });
+        }
+
+        // Example usage
+        document.addEventListener('DOMContentLoaded', () => {
+            const options1 = [
+                { value: 'option1', text: 'AT' },
+                { value: 'option2', text: 'DG' },
+                { value: 'option3', text: 'HI' },
+                { value: 'option4', text: 'WW' }
+            ];
+            addItemLine('Bananas', '$1.49', options1, 'itemsContainer');
+            // Call addItemLine as many times as needed with different parameters to add more items
+            const options2 = [
+                { value: 'option1', text: 'BG' },
+                { value: 'option2', text: 'DG' },
+                { value: 'option3', text: 'HI' },
+                { value: 'option4', text: 'WW' }
+            ];
+            addItemLine('Apples', '$2.49', options2, 'itemsContainer');
+        });
+    </script>
 
     <main>
         <section>
