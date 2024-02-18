@@ -113,6 +113,13 @@
     </nav>
 
     <script>
+        const optionsM = [
+            { value: 'option1', text: 'AT' },
+            { value: 'option2', text: 'DG' },
+            { value: 'option3', text: 'HI' },
+            { value: 'option4', text: 'WW' }
+        ];
+
         function addItemLine(itemText, priceText, options, containerId) {
             // Create the item line container
             const itemLine = document.createElement('div');
@@ -178,6 +185,23 @@
             ];
             addItemLine('Apples', '$2.49', options2, 'itemsContainer');
         });
+
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add Item';
+        addButton.onclick = function() {
+            // Call addItemLine as many times as needed with different parameters to add more items
+            const options = [
+                { value: 'option1', text: 'BG' },
+                { value: 'option2', text: 'DG' },
+                { value: 'option3', text: 'HI' },
+                { value: 'option4', text: 'WW' }
+            ];
+            addItemLine('New Item', '$2.99', options, 'itemsContainer');
+        };
+
+        document.getElementById('itemsContainer').appendChild(addButton);
+
+        addButton.click();
     </script>
 
     <main>
