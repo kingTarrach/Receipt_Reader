@@ -1,169 +1,255 @@
-{% extends "base.html" %}
-{% block content %}
-   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initials Box</title>
+                <style>
+                    /* Style the select menu */
+                        .item_line {
+                            display: flex;
+                            align-items: center;
+                        }
+                        select {
+                            padding: 4px;
+                            font-size: 14px;
+                            border: 1px solid #000000;
+                            background-color: #ffffff;
+                            width: 60px; /* Adjust width as needed */
+                            height: 29px;
+                            margin: 2px;
+                            display: flex;
+                            align-items: center;
+                        }
+
+                        /* Style the options */
+                        option {
+                            padding: 10px;
+                            font-size: 14px;
+                            z-index: 1;
+                            display: flex;
+                        }
+
+                        /* Style the select when it's focused */
+                        select:focus {
+                            outline: none;
+                            border-color: #3f3b3b;
+                        }
+                </style>                
+    <title>Item Box</title>
+                <style>
+                    .item-box {
+                        border: 1px solid #000000; /* Adds a black border around the div */
+                        padding: 4px; /* Adds some space between the text and the border */
+                        margin-left: 4px; /* Adds some space outside the border */
+                        width: 150px; /* Specifies the width of the box */
+                        height: 20px; /* Specifies the height of the box */
+                        overflow: auto; /* Ensures the content is scrolled if it overflows */
+                        background-color: #ffffff; /* Sets a light gray background color */
+                        display: inline-block;
+                    }
+                </style>
+    <title>Price Box</title>
+                <style>
+                    .price-box {
+                        border: 1px solid #000000; /* Adds a black border around the div */
+                        padding: 4px; /* Adds some space between the text and the border */
+                        margin-left: 4px; /* Adds some space outside the border */
+                        width: 50px; /* Specifies the width of the box */
+                        height: 20px; /* Specifies the height of the box */
+                        overflow: auto; /* Ensures the content is scrolled if it overflows */
+                        background-color: #ffffff; /* Sets a light gray background color */
+                        display: inline-block;
+                    }
+                </style>
+    <title>Initials</title>
+                <style>
+                    .initials {
+                        border: 1px solid #000000;
+                        padding: 4px;
+                        width: 40px;
+                        height: 20px;
+                        background-color: #ffffff;
+                        display: inline-block;
+                        font-size: 14px;
+                        text-align: center;
+                    }
+                </style>
+</head>
 <body>
     <header>
         <h1>Splitting Page</h1>
-        
     </header>
 
     <nav>
         <h2>Purchaser List</h2>
         <p style="margin-right: 10px; font-size: 16px;">Purchasers:</p>
-            <div id="purchasersContainer">
-                <div class="item_list">
-                    <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px" oninput="updateInitials(this)">
-                    <input type="text" class="initials" placeholder="Initials" readonly>
-                </div>
-                <div class="item_list">
-                    <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials(this)">
-                    <input type="text" class="initials" placeholder="Initials" readonly>
-                </div>
+        <div id="purchasersContainer">
+            <div class="item_list">
+                <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px" oninput="updateInitials(this)">
+                <input type="text" class="initials" placeholder="Initials" readonly>
             </div>
-            <button onclick="addItem()">Add Purchaser</button>
+            <div class="item_list">
+                <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials(this)">
+                <input type="text" class="initials" placeholder="Initials" readonly>
+            </div>
+        </div>
+        <button onclick="addItem()">Add Purchaser</button>
 
-            <script>
-                function updateInitials(element) {
-                    var fullName = element.value;
-                    var initials = fullName.split(' ').map((n) => n[0]).join('');
-                    // Find the closest parent with the class 'item_list'
-                    var itemList = element.closest('.item_list');
-                    // Within this 'item_list', find the element with class 'initials'
-                    var initialsInput = itemList.querySelector('.initials');
-                    initialsInput.value = initials.toUpperCase();
-                }
+        <script>
+            function updateInitials(element) {
+                var fullName = element.value;
+                var initials = fullName.split(' ').map((n) => n[0]).join('');
+                var itemList = element.closest('.item_list');
+                var initialsInput = itemList.querySelector('.initials');
+                initialsInput.value = initials.toUpperCase();
 
-                function addItem() {
-                    // Create a new div with class 'item_list'
-                    var newItemList = document.createElement('div');
-                    newItemList.className = 'item_list';
+                // Update the options for all items
+                updateOptions();
+            }
 
-                    // Create the fullName input
-                    var fullNameInput = document.createElement('input');
-                    fullNameInput.type = 'text';
-                    fullNameInput.className = 'fullName';
-                    fullNameInput.placeholder = 'Full Name';
-                    fullNameInput.style.marginRight = '10px';
-                    fullNameInput.oninput = function() { updateInitials(this); };
+            function addItem() {
+                var newItemList = document.createElement('div');
+                newItemList.className = 'item_list';
 
-                    // Create the initials input
-                    var initialsInput = document.createElement('input');
-                    initialsInput.type = 'text';
-                    initialsInput.className = 'initials';
-                    initialsInput.placeholder = 'Initials';
-                    initialsInput.readOnly = true;
+                var fullNameInput = document.createElement('input');
+                fullNameInput.type = 'text';
+                fullNameInput.className = 'fullName';
+                fullNameInput.placeholder = 'Full Name';
+                fullNameInput.style.marginRight = '10px';
+                fullNameInput.oninput = function() { updateInitials(this); };
 
-                    // Append the inputs to the newItemList div
-                    newItemList.appendChild(fullNameInput);
-                    newItemList.appendChild(initialsInput);
+                var initialsInput = document.createElement('input');
+                initialsInput.type = 'text';
+                initialsInput.className = 'initials';
+                initialsInput.placeholder = 'Initials';
+                initialsInput.readOnly = true;
 
-                    // Append the newItemList div to the container
-                    document.getElementById('purchasersContainer').appendChild(newItemList);
-                }
-            </script>
+                newItemList.appendChild(fullNameInput);
+                newItemList.appendChild(initialsInput);
+
+                document.getElementById('purchasersContainer').appendChild(newItemList);
+
+                // Update the options for all items
+                updateOptions();
+            }
+
+            function updateOptions() {
+                // Get the current initials
+                var currentInitials = Array.from(document.querySelectorAll('.initials')).map(input => input.value);
+
+                // Update options for all items
+                const itemsContainer = document.getElementById('itemsContainer');
+                const itemLines = itemsContainer.querySelectorAll('.item_line');
+                itemLines.forEach(itemLine => {
+                    const select = itemLine.querySelector('select');
+                    // Remove existing options
+                    select.innerHTML = '';
+
+                    // Add the current initials as options
+                    currentInitials.forEach(initial => {
+                        var option = document.createElement('option');
+                        option.value = initial;
+                        option.textContent = initial;
+                        select.appendChild(option);
+                    });
+                });
+            }
+        </script>
     </nav>
+
     <nav>
-    <h2>Item List</h2>
-    <ul id="itemsContainer">
-        <!-- Dynamically added item lines will go here -->
-    </ul>
+        <h2>Item List</h2>
+        <ul id="itemsContainer">
+            <!-- Dynamically added item lines will go here -->
+        </ul>
+
+        <script>
+            function addItemLine(itemText, priceText, containerId) {
+                const itemLine = document.createElement('div');
+                itemLine.className = 'item_line';
+
+                const initialsBox = document.createElement('div');
+                initialsBox.className = 'initials-box';
+                const select = document.createElement('select');
+
+                // Add the current initials as options
+                Array.from(document.querySelectorAll('.initials')).forEach(initial => {
+                    var option = document.createElement('option');
+                    option.value = initial.value;
+                    option.textContent = initial.value;
+                    select.appendChild(option);
+                });
+
+                initialsBox.appendChild(select);
+
+                const itemBox = document.createElement('div');
+                itemBox.className = 'item-box';
+                itemBox.contentEditable = true;
+                itemBox.textContent = itemText;
+
+                const priceBox = document.createElement('div');
+                priceBox.className = 'price-box';
+                priceBox.contentEditable = true;
+                priceBox.textContent = priceText;
+
+                itemLine.appendChild(initialsBox);
+                itemLine.appendChild(itemBox);
+                itemLine.appendChild(priceBox);
+
+                document.getElementById(containerId).appendChild(itemLine);
+
+                select.addEventListener('change', function() {
+                    var selectedValue = this.value;
+                    console.log("Selected value: " + selectedValue);
+                });
+            }
+///////// CONSTRUCTION ZONE
+            // document.addEventListener('DOMContentLoaded', () => {
+                
+            //     addItemLine('Bananas', '$1.49', 'itemsContainer');
+            //     // Call addItemLine as many times as needed with different parameters to add more items
+                
+            //     addItemLine('Apples', '$2.49', 'itemsContainer');
+            // });
+            const itemsFromFlask = {{ items|tojson }};
+            const subtotalFromFlask = "{{ subtotal }}";
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // Now, use itemsFromFlask and subtotalFromFlask with your addItemLine function
+                itemsFromFlask.forEach(item => {
+                    addItemLine(item.itemName, `$${item.price}`, 'itemsContainer');
+                });
+
+                // Optionally, update subtotal display using subtotalFromFlask
+                document.getElementById('subtotalValue').textContent = `$${subtotalFromFlask}`;
+            });
+
+            const addButton = document.createElement('button');
+            addButton.textContent = 'Add Item';
+            addButton.onclick = function() {
+                // Call addItemLine as many times as needed with different parameters to add more items
+                addItemLine('New Item', '$0.00', 'itemsContainer');
+            };
+
+            document.getElementById('itemsContainer').appendChild(addButton);
+
+            addButton.click();
+        </script>
     </nav>
 
-    <script>
-        const optionsM = [
-            { value: 'option1', text: 'AT' },
-            { value: 'option2', text: 'DG' },
-            { value: 'option3', text: 'HI' },
-            { value: 'option4', text: 'WW' }
-        ];
+    <main>
 
-        function addItemLine(itemText, priceText, options, containerId) {
-            // Create the item line container
-            const itemLine = document.createElement('div');
-            itemLine.className = 'item_line';
+        <section>
+            <h2>Contact Information</h2>
+            <p>austin.tarrach@wsu.edu</p>
+            <p>daniel.gapper@wsu.edu</p>
+            <p>daniel.calle@wsu.edu</p>
+        </section>
+    </main>
 
-            // Create the initials box and select element
-            const initialsBox = document.createElement('div');
-            initialsBox.className = 'initials-box';
-            const select = document.createElement('select');
-            // Generate a unique ID for the select element
-            const selectId = `initialSelect-${Math.random().toString(36).substr(2, 9)}`;
-            select.id = selectId;
-            options.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option.value;
-                optionElement.textContent = option.text;
-                select.appendChild(optionElement);
-            });
-            initialsBox.appendChild(select);
-
-            // Create the item box
-            const itemBox = document.createElement('div');
-            itemBox.className = 'item-box';
-            itemBox.contentEditable = true;
-            itemBox.textContent = itemText;
-
-            // Create the price box
-            const priceBox = document.createElement('div');
-            priceBox.className = 'price-box';
-            priceBox.contentEditable = true;
-            priceBox.textContent = priceText;
-
-            // Append all to itemLine
-            itemLine.appendChild(initialsBox);
-            itemLine.appendChild(itemBox);
-            itemLine.appendChild(priceBox);
-
-            // Add the item line to the container
-            document.getElementById(containerId).appendChild(itemLine);
-
-            // Add event listener to the select element
-            document.getElementById(selectId).addEventListener('change', function() {
-                var selectedValue = this.value;
-                console.log("Selected value: " + selectedValue);
-            });
-        }
-
-        // Example usage
-        document.addEventListener('DOMContentLoaded', () => {
-            const options1 = [
-                { value: 'option1', text: 'AT' },
-                { value: 'option2', text: 'DG' },
-                { value: 'option3', text: 'HI' },
-                { value: 'option4', text: 'WW' }
-            ];
-            addItemLine('Bananas', '$1.49', options1, 'itemsContainer');
-            // Call addItemLine as many times as needed with different parameters to add more items
-            const options2 = [
-                { value: 'option1', text: 'BG' },
-                { value: 'option2', text: 'DG' },
-                { value: 'option3', text: 'HI' },
-                { value: 'option4', text: 'WW' }
-            ];
-            addItemLine('Apples', '$2.49', options2, 'itemsContainer');
-        });
-
-        const addButton = document.createElement('button');
-        addButton.textContent = 'Add Item';
-        addButton.onclick = function() {
-            // Call addItemLine as many times as needed with different parameters to add more items
-            const options = [
-                { value: 'option1', text: 'BG' },
-                { value: 'option2', text: 'DG' },
-                { value: 'option3', text: 'HI' },
-                { value: 'option4', text: 'WW' }
-            ];
-            addItemLine('New Item', '$2.99', options, 'itemsContainer');
-        };
-
-        document.getElementById('itemsContainer').appendChild(addButton);
-
-        addButton.click();
-    </script>
-
-
-   
+    <footer>
+        <p>&copy; 2024 Hackathon, Cutthroat Coders. All rights reserved.</p>
+    </footer>
 </body>
 </html>
-
-{% endblock %}
