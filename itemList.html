@@ -71,6 +71,8 @@
                         height: 20px;
                         background-color: #ffffff;
                         display: inline-block;
+                        font-size: 14px;
+                        text-align: center;
                     }
                 </style>
 </head>    
@@ -82,16 +84,24 @@
 
     <nav>
         <h2>Purchaser List</h2>
+        <p style="margin-right: 10px; font-size: 16px;">Purchasers:</p>
             <div class="item_list">
-                <p style="margin-right: 10px; font-size: 16px;">Purchaser 1:</p>
-                <input type="text" id="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials()">
-                <input type="text" id="initials" placeholder="Initials" readonly>
+                <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px" oninput="updateInitials(this)">
+                <input type="text" class="initials" placeholder="Initials" readonly>
+            </div>
+            <div class="item_list">
+                <input type="text" class="fullName" placeholder="Full Name" style="margin-right: 10px;" oninput="updateInitials(this)">
+                <input type="text" class="initials" placeholder="Initials" readonly>
             </div>
             <script>
-                function updateInitials() {
-                    var fullName = document.getElementById('fullName').value;
-                    var initials = fullName.split(' ').map((n)=>n[0]).join('');
-                    document.getElementById('initials').value = initials.toUpperCase();
+                function updateInitials(element) {
+                    var fullName = element.value;
+                    var initials = fullName.split(' ').map((n) => n[0]).join('');
+                    // Find the closest parent with the class 'item_list'
+                    var itemList = element.closest('.item_list');
+                    // Within this 'item_list', find the element with class 'initials'
+                    var initialsInput = itemList.querySelector('.initials');
+                    initialsInput.value = initials.toUpperCase();
                 }
             </script>
     </nav>
