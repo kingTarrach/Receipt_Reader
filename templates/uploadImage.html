@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main>
+    <section>
+        <h2>Add Image</h2>
+        <div style="display: flex; align-items: center;"> <!-- Container for buttons -->
+            <input type="file" id="fileInput" accept="image/*">
+            <button onclick="uploadPhoto()">Upload</button>
+            <button id="submitPhotoButton" style="display: none;">Submit Photo</button> <!-- Hidden initially -->
+        </div>
+    </section>
+
+    <section id="previewSection" style="display: none;">
+        <h2>Preview</h2>
+        
+        <img id="previewImage" alt="Uploaded Image" style="max-width: 600px; max-height: 500px;">
+
+    </section>
+</main>
+
+
+<!--Javascript code to upload and save the photo-->
+<!-- uploadPhoto() sends the photo to the Flask backend in app.py-->
+<script>
+    function uploadPhoto() {
+        const fileInput = document.getElementById('fileInput');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('Please select a file first!');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('photo', file);
+
+        fetch('/upload', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                // Make the "Submit Photo" button visible and set its onclick function
+                const submitButton = document.getElementById('submitPhotoButton');
+                submitButton.style.display = 'inline-block'; // Show the button
+                submitButton.onclick = function() {
+                    window.location.href = '/items'; // Redirect to the /items route
+                };
+            } else {
+                console.error('Upload failed');
+            }
+        });
+
+        const previewSection = document.getElementById('previewSection');
+        const previewImage = document.getElementById('previewImage');
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewSection.style.display = 'block';
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>
+
+{% endblock %}
